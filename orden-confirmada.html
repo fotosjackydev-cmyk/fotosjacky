@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>¡Compra confirmada! | Fotos Jacky</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/src/css/design-system.css">
+  <link rel="stylesheet" href="/src/css/shop.css">
+  <style>
+    .order-result {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 160px 24px 100px;
+      text-align: center;
+    }
+    .result-icon {
+      width: 96px; height: 96px;
+      margin: 0 auto 32px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, var(--turquoise), var(--blue-violet));
+      box-shadow: 0 18px 44px -16px rgba(6, 214, 160, 0.6);
+      animation: pop 0.5s var(--ease-out);
+    }
+    .result-icon svg { width: 48px; height: 48px; stroke: #fff; }
+    @keyframes pop { 0% { transform: scale(0); } 70% { transform: scale(1.12); } 100% { transform: scale(1); } }
+    .result-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 16px;
+    }
+    .result-lead {
+      font-family: var(--font-editorial);
+      font-size: 1.35rem;
+      font-style: italic;
+      color: var(--ink-soft);
+      line-height: 1.5;
+      margin-bottom: 28px;
+    }
+    .order-badge {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--violet);
+      background: var(--bg-tint);
+      border: 1px solid var(--line);
+      border-radius: 100px;
+      padding: 10px 24px;
+      margin-bottom: 40px;
+    }
+    .result-note {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+      line-height: 1.7;
+      max-width: 520px;
+      margin: 0 auto 44px;
+    }
+    .result-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  </style>
+</head>
+<body class="store-light">
+
+  <header class="shop-header" id="shopHeader">
+    <div class="shop-header-inner">
+      <a href="index.html" class="shop-logo">FOTOS <span>JACKY.</span></a>
+      <nav class="shop-nav">
+        <a href="index.html">Tienda</a>
+        <a href="sesiones.html">Sesiones</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="order-result">
+    <div class="result-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M20 6L9 17l-5-5"/>
+      </svg>
+    </div>
+
+    <h1 class="result-title">¡Gracias por tu compra!</h1>
+    <p class="result-lead">Tu pago fue aprobado y tu pedido ya está en camino a hacerse realidad.</p>
+
+    <div class="order-badge" id="orderBadge" style="display:none">Pedido #<span id="orderNumber"></span></div>
+
+    <p class="result-note">
+      Te enviamos un email con el detalle de tu compra. En breve vamos a preparar tu pedido
+      y te avisaremos cuando esté listo para el envío o el retiro.
+      <br><br>
+      Si tenés alguna duda, escribinos y con gusto te ayudamos.
+    </p>
+
+    <div class="result-actions">
+      <a href="index.html" class="hero-cta-btn">Volver a la tienda</a>
+      <a href="index.html#carnet" class="hero-cta-btn ghost">Ver más servicios</a>
+    </div>
+  </main>
+
+  <script type="module">
+    import { api } from '/src/js/api.js';
+
+    // Vaciar el carrito: la compra se completó
+    try { localStorage.removeItem('fotosjacky_cart'); } catch (e) {}
+
+    // Mostrar el número de pedido real consultándolo al backend
+    const params = new URLSearchParams(window.location.search);
+    const orderId = params.get('order_id') || params.get('external_reference');
+    if (orderId) {
+      try {
+        const res = await fetch(`${api.base}/orders/${orderId}/status`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data.order_number != null) {
+            document.getElementById('orderNumber').textContent =
+              String(data.order_number).padStart(4, '0');
+            document.getElementById('orderBadge').style.display = 'inline-block';
+          }
+        }
+      } catch (e) { /* si no se puede, simplemente no mostramos el número */ }
+    }
+  </script>
+</body>
+</html>

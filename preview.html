@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fotos Jacky — Tus fotos, tu historia</title>
+  <meta name="description" content="Imprimimos tus recuerdos con la calidad que merecen. Fotolibros, cuadros, impresiones y regalos personalizados.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="static/css/styles.css">
+</head>
+<body>
+
+  <!-- ===== MOBILE NAV OVERLAY ===== -->
+  <div class="nav-overlay" id="navOverlay"></div>
+  <nav class="mobile-nav" id="mobileNav">
+    <button class="mobile-nav-close" id="mobileNavClose">&times;</button>
+    <div class="logo">
+      <span class="logo-fotos">FOTOS</span>
+      <span class="logo-jacky">Jacky</span>
+    </div>
+    <div class="mobile-nav-links">
+      <a href="#categorias">Fotolibros</a>
+      <a href="#categorias">Cuadros</a>
+      <a href="#categorias">Impresiones</a>
+      <a href="#categorias">Regalos</a>
+      <a href="#proceso">Cómo funciona</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+  </nav>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header" id="mainHeader">
+    <div class="container">
+      <div class="header-inner">
+        <button class="hamburger" id="hamburgerBtn">
+          <span></span><span></span><span></span>
+        </button>
+        <a href="#" class="logo">
+          <span class="logo-fotos">FOTOS</span>
+          <span class="logo-jacky">Jacky</span>
+        </a>
+        <nav class="nav-desktop">
+          <a href="#categorias">Fotolibros</a>
+          <a href="#categorias">Cuadros</a>
+          <a href="#categorias">Impresiones</a>
+          <a href="#categorias">Regalos</a>
+        </nav>
+        <div class="header-utils">
+          <button class="header-icon" aria-label="Buscar">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </button>
+          <button class="header-icon cart-badge" aria-label="Carrito">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+            <span class="cart-count">2</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <img src="static/images/hero-lifestyle.png" alt="Familia mirando un fotolibro juntos">
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="text-accent hero-label" style="opacity:0;transform:translateY(30px);animation:fadeUp 0.8s 0.1s forwards;">Fotos Jacky</span>
+      <h1>Tus fotos, tu historia</h1>
+      <p>Imprimimos tus recuerdos con la calidad que merecen. Cada producto es único, como cada momento.</p>
+      <div class="hero-buttons">
+        <a href="#categorias" class="btn btn-primary">Crear mi producto</a>
+        <a href="#categorias" class="btn btn-outline">Ver productos</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CATEGORIES GRID ===== -->
+  <section class="section" id="categorias">
+    <div class="container">
+      <span class="text-accent section-title reveal" style="display:block;margin-bottom:8px;">Nuestros productos</span>
+      <h2 class="section-title reveal">Convertí momentos en objetos</h2>
+      <p class="section-subtitle reveal">Cada producto está pensado para transformar tus mejores recuerdos en algo que podés tocar, regalar y guardar para siempre.</p>
+      <div class="categories-grid">
+        <a href="#" class="category-card reveal reveal-delay-1">
+          <img src="static/images/cat-fotolibros.png" alt="Fotolibros">
+          <div class="category-overlay">
+            <span class="category-name">Fotolibros</span>
+          </div>
+        </a>
+        <a href="#" class="category-card reveal reveal-delay-2">
+          <img src="static/images/cat-cuadros.png" alt="Cuadros">
+          <div class="category-overlay">
+            <span class="category-name">Cuadros</span>
+          </div>
+        </a>
+        <a href="#" class="category-card reveal reveal-delay-3">
+          <img src="static/images/cat-impresiones.png" alt="Impresiones">
+          <div class="category-overlay">
+            <span class="category-name">Impresiones</span>
+          </div>
+        </a>
+        <a href="#" class="category-card reveal reveal-delay-4">
+          <img src="static/images/cat-regalos.png" alt="Regalos">
+          <div class="category-overlay">
+            <span class="category-name">Regalos</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== VALUE PROPS ===== -->
+  <section class="section section-white">
+    <div class="container">
+      <div class="value-grid">
+        <div class="value-item reveal reveal-delay-1">
+          <div class="value-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M24 4l6 12 13 2-9.5 9 2.5 13L24 34l-12 6 2.5-13L5 18l13-2z"/></svg>
+          </div>
+          <h3>Calidad premium</h3>
+          <p>Materiales de primera calidad para productos que duran toda la vida.</p>
+        </div>
+        <div class="value-item reveal reveal-delay-2">
+          <div class="value-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="6" width="32" height="36" rx="3"/><path d="M16 6v36"/><path d="M8 16h8"/><path d="M8 26h8"/><circle cx="32" cy="20" r="4"/><path d="M26 36l4-6 6 6"/></svg>
+          </div>
+          <h3>Personalización total</h3>
+          <p>Diseñá cada detalle. Tu producto, a tu manera.</p>
+        </div>
+        <div class="value-item reveal reveal-delay-3">
+          <div class="value-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="14" width="40" height="28" rx="3"/><path d="M12 14V10a12 12 0 0124 0v4"/><circle cx="24" cy="28" r="4"/><path d="M24 32v4"/></svg>
+          </div>
+          <h3>Envíos a todo el país</h3>
+          <p>Recibí tu pedido en la puerta de tu casa, donde estés.</p>
+        </div>
+        <div class="value-item reveal reveal-delay-4">
+          <div class="value-icon">
+            <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6h8l2 8h10l-4 14H12L8 14h10z"/><circle cx="20" cy="40" r="3"/><circle cx="32" cy="40" r="3"/><path d="M12 28l-4-14"/><path d="M24 6v8"/></svg>
+          </div>
+          <h3>Garantía de satisfacción</h3>
+          <p>Si no estás conforme, lo resolvemos. Tu tranquilidad es nuestra prioridad.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FEATURED PRODUCT ===== -->
+  <section class="section">
+    <div class="container">
+      <div class="featured-split">
+        <div class="featured-image reveal">
+          <img src="static/images/cat-fotolibros.png" alt="Fotolibro Premium 30x30">
+        </div>
+        <div class="featured-content reveal">
+          <span class="text-accent">Producto destacado</span>
+          <h2>Fotolibro Premium 30×30</h2>
+          <p>Tapas duras personalizables, 40 páginas de papel fotográfico de máxima calidad. El regalo perfecto para revivir tus mejores momentos.</p>
+          <p style="color:var(--carbon);font-weight:500;">Hecho para durar. Diseñado con amor.</p>
+          <span class="featured-price">$24.900</span>
+          <a href="#" class="btn btn-primary">Crear el mío</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TESTIMONIALS ===== -->
+  <section class="section section-white">
+    <div class="container">
+      <span class="text-accent section-title reveal" style="display:block;margin-bottom:8px;">Testimonios</span>
+      <h2 class="section-title reveal">Lo que dicen nuestros clientes</h2>
+      <p class="section-subtitle reveal">Miles de familias ya confiaron en nosotros para preservar sus recuerdos más valiosos.</p>
+      <div class="testimonials-grid">
+        <div class="testimonial-card reveal reveal-delay-1">
+          <div class="testimonial-stars">
+            <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L18 6.71l-4 3.9.94 5.5L10 13.47l-4.94 2.64.94-5.5-4-3.9 5.61-.87z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L18 6.71l-4 3.9.94 5.5L10 13.47l-4.94 2.64.94-5.5-4-3.9 5.61-.87z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L18 6.71l-4 3.9.94 5.5L10 13.47l-4.94 2.64.94-5.5-4-3.9 5.61-.87z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L18 6.71l-4 3.9.94 5.5L10 13.47l-4.94 2.64.94-5.5-4-3.9 5.61-.87z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L18 6.71l-4 3.9.94 5.5L10 13.47l-4.94 2.64.94-5.5-4-3.9 5.61-.87z"/></svg>
+          </div>
+          <p class="testimonial-text">"El fotolibro de nuestro casamiento quedó espectacular. La calidad del papel y la impresión superó todas nuestras expectativas."</p>
+          <p class="testimonial-author">María Gómez</p>
+          <p class="testimonial-role">Fotolibro de bodas</p>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-2">
+          <div class="testimonial-stars">
+            <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L18 6.71l-4 3.9.94 5.5L10 13.47l-4.94 2.64.94-5.5-4-3.9 5.61-.87z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L18 6.71l-4 3.9.94 5.5L10 13.47l-4.94 2.64.94-5.5-4-3.9 5.61-.87z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L18 6.71l-4 3.9.94 5.5L10 13.47l-4.94 2.64.94-5.5-4-3.9 5.61-.87z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L18 6.71l-4 3.9.94 5.5L10 13.47l-4.94 2.64.94-5.5-4-3.9 5.61-.87z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L18 6.71l-4 3.9.94 5.5L10 13.47l-4.94 2.64.94-5.5-4-3.9 5.61-.87z"/></svg>
+          </div>
+          <p class="testimonial-text">"Le regalé un cuadro en lienzo a mi mamá con una foto de toda la familia. Lloró de la emoción. Gracias por hacer esto posible."</p>
+          <p class="testimonial-author">Lucas Fernández</p>
+          <p class="testimonial-role">Cuadro personalizado</p>
+        </div>
+        <div class="testimonial-card reveal reveal-delay-3">
+          <div class="testimonial-stars">
+            <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L18 6.71l-4 3.9.94 5.5L10 13.47l-4.94 2.64.94-5.5-4-3.9 5.61-.87z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L18 6.71l-4 3.9.94 5.5L10 13.47l-4.94 2.64.94-5.5-4-3.9 5.61-.87z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L18 6.71l-4 3.9.94 5.5L10 13.47l-4.94 2.64.94-5.5-4-3.9 5.61-.87z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L18 6.71l-4 3.9.94 5.5L10 13.47l-4.94 2.64.94-5.5-4-3.9 5.61-.87z"/></svg>
+            <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84L18 6.71l-4 3.9.94 5.5L10 13.47l-4.94 2.64.94-5.5-4-3.9 5.61-.87z"/></svg>
+          </div>
+          <p class="testimonial-text">"Pedí imanes con fotos de mi viaje. Llegaron rápido y la calidad es increíble. Ya estoy pensando en el próximo pedido."</p>
+          <p class="testimonial-author">Camila Ruiz</p>
+          <p class="testimonial-role">Imanes personalizados</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PROCESS STEPS ===== -->
+  <section class="section" id="proceso">
+    <div class="container">
+      <span class="text-accent section-title reveal" style="display:block;margin-bottom:8px;">Cómo funciona</span>
+      <h2 class="section-title reveal">Simple como 1, 2, 3</h2>
+      <p class="section-subtitle reveal">En minutos podés crear un producto único. Sin complicaciones.</p>
+      <div class="process-grid">
+        <div class="process-step reveal reveal-delay-1">
+          <div class="step-number">1</div>
+          <h3>Elegí tus fotos</h3>
+          <p>Subí las imágenes desde tu celular, computadora o redes sociales.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-2">
+          <div class="step-number">2</div>
+          <h3>Diseñá tu producto</h3>
+          <p>Personalizá cada detalle con nuestro editor simple e intuitivo.</p>
+        </div>
+        <div class="process-step reveal reveal-delay-3">
+          <div class="step-number">3</div>
+          <h3>Recibilo en casa</h3>
+          <p>Lo producimos con cuidado y te lo enviamos a la puerta de tu casa.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== NEWSLETTER ===== -->
+  <section class="newsletter" id="contacto">
+    <div class="container">
+      <h2>Recibí ofertas exclusivas</h2>
+      <p>Suscribite y enterate antes que nadie de descuentos y nuevos productos.</p>
+      <form class="newsletter-form" onsubmit="event.preventDefault()">
+        <input type="email" placeholder="Tu email" required>
+        <button type="submit" class="btn btn-primary">Suscribirme</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo">
+            <span class="logo-fotos">FOTOS</span>
+            <span class="logo-jacky">Jacky</span>
+          </div>
+          <p>Imprimimos tus recuerdos con la calidad que merecen. Cada producto es único, como cada momento tuyo.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+            <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+            <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></a>
+          </div>
+        </div>
+        <div>
+          <h4>Productos</h4>
+          <div class="footer-links">
+            <a href="#">Fotolibros</a>
+            <a href="#">Cuadros</a>
+            <a href="#">Impresiones</a>
+            <a href="#">Regalos</a>
+          </div>
+        </div>
+        <div>
+          <h4>Ayuda</h4>
+          <div class="footer-links">
+            <a href="#">Cómo comprar</a>
+            <a href="#">Envíos</a>
+            <a href="#">Preguntas frecuentes</a>
+            <a href="#">Contacto</a>
+          </div>
+        </div>
+        <div>
+          <h4>Legal</h4>
+          <div class="footer-links">
+            <a href="#">Términos y condiciones</a>
+            <a href="#">Política de privacidad</a>
+            <a href="#">Devoluciones</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Fotos Jacky. Todos los derechos reservados.</p>
+        <div class="footer-payments">
+          <div class="payment-icon">VISA</div>
+          <div class="payment-icon">MC</div>
+          <div class="payment-icon">AMEX</div>
+          <div class="payment-icon">MP</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+    // Header scroll behavior
+    const header = document.getElementById('mainHeader');
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+      const currentScroll = window.pageYOffset;
+      if (currentScroll > 60) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+      lastScroll = currentScroll;
+    });
+
+    // Mobile menu
+    const hamburger = document.getElementById('hamburgerBtn');
+    const mobileNav = document.getElementById('mobileNav');
+    const navOverlay = document.getElementById('navOverlay');
+    const mobileNavClose = document.getElementById('mobileNavClose');
+
+    function openNav() {
+      mobileNav.classList.add('open');
+      navOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeNav() {
+      mobileNav.classList.remove('open');
+      navOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    hamburger.addEventListener('click', openNav);
+    navOverlay.addEventListener('click', closeNav);
+    mobileNavClose.addEventListener('click', closeNav);
+    document.querySelectorAll('.mobile-nav-links a').forEach(link => {
+      link.addEventListener('click', closeNav);
+    });
+
+    // Scroll Reveal (IntersectionObserver)
+    const revealElements = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+    revealElements.forEach(el => revealObserver.observe(el));
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const headerHeight = header.offsetHeight;
+          const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+          window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>

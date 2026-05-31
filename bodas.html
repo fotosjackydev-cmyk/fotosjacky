@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bodas — Fotos Jacky</title>
+  <meta name="description" content="Fotografía de bodas editorial. Capturamos tu amor para siempre.">
+  <link rel="stylesheet" href="/src/css/design-system.css">
+  <link rel="stylesheet" href="/src/css/lux-theme.css">
+  <style>
+    .masonry-section { padding: 80px 0 120px; background: var(--lux-cream); }
+    .masonry-grid { display: flex; gap: 20px; align-items: flex-start; max-width: 1280px; margin: 0 auto; padding: 0 40px; }
+    .masonry-column { flex: 1; display: flex; flex-direction: column; gap: 20px; transition: transform 0.1s linear; }
+    .masonry-column:nth-child(2) { margin-top: 80px; }
+    .masonry-column:nth-child(3) { margin-top: -40px; }
+    .masonry-item { border-radius: 4px; overflow: hidden; }
+    .masonry-item img { width:100%; display:block; object-fit:cover; transition: transform 0.6s cubic-bezier(0.16,1,0.3,1), filter 0.4s; filter:brightness(0.97); }
+    .masonry-item:hover img { transform: scale(1.04); filter:brightness(1); }
+    .h-small { height: 300px; }
+    .h-med   { height: 450px; }
+    .h-large { height: 600px; }
+
+    .narrative-section { padding: 160px 40px; background: var(--lux-ivory); }
+    .narrative-items { max-width: 900px; margin: 0 auto; display: flex; flex-direction: column; gap: 80px; }
+    .narrative-item { opacity: 0.2; transform: translateY(30px); transition: opacity 0.9s, transform 0.9s; }
+    .narrative-item.visible { opacity: 1; transform: translateY(0); }
+    .narrative-item h3 { font-family: var(--font-display); font-size: clamp(2.2rem, 5vw, 4rem); color: var(--lux-charcoal); margin-bottom: 16px; }
+    .narrative-item p { font-family: var(--font-editorial); font-size: 1.2rem; font-style: italic; color: var(--lux-muted); }
+
+    @media(max-width:900px){
+      .masonry-grid{flex-direction:column;padding:0 20px;}
+      .masonry-column{margin-top:0 !important; transform:none !important;}
+    }
+  </style>
+</head>
+<body class="lux-theme">
+
+  <div class="custom-cursor" id="cursor"></div>
+
+  <header class="lux-header" id="lux-header">
+    <a href="index.html" class="lux-logo">FOTOS <span>JACKY.</span></a>
+    <nav class="lux-nav">
+      <a href="quince.html">15 Años</a>
+      <a href="estudio.html">Estudio</a>
+      <a href="index.html">La Tienda</a>
+    </nav>
+  </header>
+
+  <!-- HERO SPLIT — imagen a la izquierda -->
+  <section class="lux-hero">
+    <div class="lux-hero-image" style="order:1;">
+      <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=85&w=1200" alt="Bodas">
+    </div>
+    <div class="lux-hero-text" style="order:2;">
+      <span class="lux-tag">Fotografía de Bodas</span>
+      <h1 class="lux-display">El amor<br>merece ser<br><em>eterno.</em></h1>
+      <p class="lux-editorial" style="margin-top:32px; max-width:400px;">
+        Documentamos cada mirada, cada risa, cada lágrima de alegría. Porque esos detalles construyen la historia más grande de tu vida.
+      </p>
+      <div style="margin-top:48px; display:flex; gap:16px; flex-wrap:wrap;">
+        <a href="tienda.html" class="btn-lux btn-lux-dark">Ver Paquetes</a>
+        <a href="#galeria" class="btn-lux btn-lux-outline">Ver Galería</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="lux-divider-accent"></div>
+
+  <!-- MASONRY PARALLAX -->
+  <section class="masonry-section" id="galeria">
+    <div style="max-width:1280px; margin:0 auto; padding:0 40px 60px;">
+      <span class="lux-number">— 01 / La Galería</span>
+      <h2 class="lux-display" style="font-size:clamp(2rem,5vw,4rem);">Momentos que<br>duran para siempre.</h2>
+    </div>
+    <div class="masonry-grid">
+      <div class="masonry-column" data-speed="0.08">
+        <div class="masonry-item h-large">
+          <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&q=80&w=800" alt="Boda">
+        </div>
+        <div class="masonry-item h-small">
+          <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?auto=format&fit=crop&q=80&w=800" alt="Boda">
+        </div>
+      </div>
+      <div class="masonry-column" data-speed="-0.12">
+        <div class="masonry-item h-med">
+          <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&q=80&w=800" alt="Boda">
+        </div>
+        <div class="masonry-item h-large">
+          <img src="https://images.unsplash.com/photo-1537368910025-7001c08cb391?auto=format&fit=crop&q=80&w=800" alt="Boda">
+        </div>
+      </div>
+      <div class="masonry-column" data-speed="0.06">
+        <div class="masonry-item h-small">
+          <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&q=80&w=800" alt="Boda">
+        </div>
+        <div class="masonry-item h-med">
+          <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&q=80&w=800" alt="Boda">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NARRATIVE -->
+  <section class="narrative-section">
+    <div class="narrative-items">
+      <div class="narrative-item">
+        <h3>01 — La Mañana.</h3>
+        <p>El nerviosismo mezclado con la euforia de saber que ese día es único en toda tu vida.</p>
+      </div>
+      <div class="narrative-item">
+        <h3>02 — El Altar.</h3>
+        <p>La mirada que nunca vas a olvidar. La que vale más que cualquier foto, y por eso la capturamos.</p>
+      </div>
+      <div class="narrative-item">
+        <h3>03 — La Fiesta.</h3>
+        <p>La explosión de alegría que se contagia. Bailar, reír, abrazar. Todo en imágenes que duran para siempre.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="lux-quote-section">
+    <p class="lux-quote">"Una boda dura unas horas.<br>Las fotos de Jacky duran <em>toda la vida</em>."</p>
+    <div class="lux-quote-author">— Fotos Jacky Studio</div>
+  </div>
+
+  <footer class="lux-footer">
+    <a href="index.html" class="lux-logo">FOTOS <span>JACKY.</span></a>
+    <p>© 2026 Fotos Jacky. Todos los derechos reservados.</p>
+    <a href="tienda.html">Ver Paquetes →</a>
+  </footer>
+
+  <script>
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+    const hdr = document.getElementById('lux-header');
+    window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', window.scrollY > 50));
+
+    // Parallax masonry
+    const cols = document.querySelectorAll('.masonry-column[data-speed]');
+    window.addEventListener('scroll', () => {
+      if (window.innerWidth > 900) {
+        cols.forEach(col => {
+          col.style.transform = `translateY(${window.scrollY * parseFloat(col.dataset.speed)}px)`;
+        });
+      }
+    });
+
+    // Narrative
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.4 });
+    document.querySelectorAll('.narrative-item').forEach(el => obs.observe(el));
+  </script>
+</body>
+</html>

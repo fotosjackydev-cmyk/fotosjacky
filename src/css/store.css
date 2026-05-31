@@ -1,0 +1,276 @@
+/* =============================================================================
+   STORE CSS — VIBRANT GRADIENT + GLASSMORPHISM
+   ============================================================================= */
+
+/* --- FONDO VIBRANTE --- */
+body.store-theme {
+  background: linear-gradient(135deg, #9B6FCC, #4361EE, #06D6A0);
+  background-size: 200% 200%;
+  animation: gradientShift 15s ease infinite;
+  color: var(--indigo-deep);
+  min-height: 100vh;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* --- HEADER EN LA TIENDA --- */
+.store-header {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.store-header .logo {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #fff;
+  text-decoration: none;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.store-nav a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 24px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.85rem;
+  text-shadow: 0 1px 5px rgba(0,0,0,0.1);
+}
+
+.store-header .cart-badge {
+  color: #fff;
+}
+
+/* --- ESTILOS GLASSMORPHISM (TARJETAS) --- */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+  padding: 32px;
+}
+
+/* --- LAYOUTS ESPECÍFICOS --- */
+.page-top-spacing {
+  padding-top: 140px;
+  padding-bottom: 60px;
+}
+
+/* Títulos */
+h1.store-title {
+  font-family: var(--font-display);
+  color: #fff;
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 8px;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.15);
+}
+p.store-subtitle {
+  color: rgba(255,255,255,0.9);
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 1.1rem;
+}
+
+/* --- BOTONES DE FILTRO (TIENDA) --- */
+.filters {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+.filter-btn {
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  padding: 10px 24px;
+  border-radius: 100px;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.filter-btn:hover, .filter-btn.active {
+  background: #fff;
+  color: var(--blue-violet);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+/* --- GRILLA DE PRODUCTOS (JS INJECT) --- */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 32px;
+}
+.product-card {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.1);
+  transition: transform 0.3s;
+  text-decoration: none;
+  color: var(--indigo-deep);
+  display: flex;
+  flex-direction: column;
+}
+.product-card:hover {
+  transform: translateY(-5px);
+}
+.product-card img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+}
+.product-info {
+  padding: 24px;
+}
+.product-info h3 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  font-family: var(--font-body);
+  font-weight: 700;
+}
+.price {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--blue-violet);
+}
+
+/* --- PRODUCTO INDIVIDUAL --- */
+.product-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+}
+.product-gallery img {
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+}
+.variants-group select, .quantity-selector input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.5);
+  font-family: inherit;
+}
+
+/* --- FORMULARIOS Y CARRITO --- */
+input[type="text"], input[type="email"], input[type="tel"], select {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 8px;
+  background: rgba(255,255,255,0.7);
+  font-family: inherit;
+  transition: border 0.3s;
+}
+input:focus, select:focus {
+  outline: none;
+  border-color: var(--blue-violet);
+  background: #fff;
+}
+
+.cart-item {
+  display: flex;
+  gap: 24px;
+  padding: 24px;
+  background: rgba(255,255,255,0.6);
+  border-radius: 12px;
+  margin-bottom: 16px;
+}
+.cart-item img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+/* --- BOTÓN COMPRAR --- */
+.btn-store {
+  width: 100%;
+  padding: 16px;
+  border-radius: 100px;
+  background: var(--indigo-deep);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-align: center;
+  text-decoration: none;
+}
+.btn-store:hover {
+  background: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+@media (max-width: 768px) {
+  .product-layout { grid-template-columns: 1fr; }
+  .store-header { padding: 16px 20px; }
+  .store-nav a { display: none; /* simple mobile nav */ }
+}
+
+/* --- UTILS (Para inyección de JS) --- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 24px;
+  border-radius: 100px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+  text-decoration: none;
+  font-size: 0.95rem;
+  border: none;
+}
+.btn-primary {
+  background: var(--indigo-deep, #0D0B1E);
+  color: #fff;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+.btn-primary:hover {
+  background: #000;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--indigo-deep, #0D0B1E);
+  border: 2px solid var(--indigo-deep, #0D0B1E);
+}
+.btn-outline:hover {
+  background: var(--indigo-deep, #0D0B1E);
+  color: #fff;
+}
+.text-accent {
+  color: var(--blue-violet);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+}
+

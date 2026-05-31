@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fotos Jacky — Imprimí tus fotos más valiosas</title>
+  <meta name="description" content="¿De qué sirve tener miles de fotos en el celu? Imprimí tus recuerdos y convertilos en algo real y para siempre. Cuadros, fotolibros, impresiones y fotos carnet en el momento.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="/src/css/design-system.css">
+  <link rel="stylesheet" href="/src/css/shop.css">
+</head>
+<body class="store-light">
+
+  <!-- ===== HEADER ===== -->
+  <header class="shop-header" id="shopHeader">
+    <div class="shop-header-inner">
+      <a href="index.html" class="shop-logo">FOTOS <span>JACKY.</span></a>
+
+      <nav class="shop-nav">
+        <a href="index.html">Tienda</a>
+        <a href="sesiones.html">Sesiones</a>
+        <a href="quince.html">15 Años</a>
+        <a href="bodas.html">Bodas</a>
+        <a href="estudio.html">Estudio</a>
+      </nav>
+
+      <a href="carrito.html" id="cartLink" class="shop-cart-btn" aria-label="Carrito">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+        <span class="shop-cart-count" id="cartCountBadge">0</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- ===== HERO CLARO ===== -->
+  <section class="shop-hero-light">
+    <div class="hero-copy">
+      <span class="hero-eyebrow">Arte · Fotografía · Recuerdos</span>
+
+      <h1 class="hero-question">
+        ¿De qué sirve tener miles de fotos en el celu y <em>no poder disfrutarlas?</em>
+      </h1>
+
+      <p class="hero-lead">
+        <strong>Imprimí tus fotos más valiosas.</strong> Convertí tus recuerdos en algo real y para siempre.
+      </p>
+
+      <div class="hero-steps">
+        <span class="hero-step"><span class="step-num">1</span> Subí tu foto</span>
+        <span class="hero-step-sep">·</span>
+        <span class="hero-step"><span class="step-num">2</span> Elegí el tamaño</span>
+        <span class="hero-step-sep">·</span>
+        <span class="hero-step"><span class="step-num">3</span> Te lo enviamos o lo retirás</span>
+      </div>
+
+      <div class="hero-cta-row">
+        <a href="#productos" class="hero-cta-btn">Imprimí tus fotos ↓</a>
+        <a href="#carnet" class="hero-cta-btn ghost">Fotos carnet al instante</a>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <img src="/static/images/hero.jpeg" alt="Fotos Jacky — Arte y Fotografía">
+      <div class="hero-stamp">
+        <span class="stamp-big">+10 años</span>
+        <span class="stamp-small">Imprimiendo recuerdos</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECCIÓN FOTOS CARNET (EL DIFERENCIAL) ===== -->
+  <section class="carnet-section" id="carnet">
+    <div class="carnet-card">
+      <div class="carnet-content">
+        <span class="carnet-badge">Solo nosotros · En el momento</span>
+        <h2 class="carnet-title">Fotos Carnet <em>al instante</em></h2>
+        <div class="carnet-types">
+          <span class="carnet-type">DNI</span>
+          <span class="carnet-type">Pasaporte</span>
+          <span class="carnet-type">Trabajo</span>
+          <span class="carnet-type">Visa</span>
+        </div>
+        <p class="carnet-desc">
+          Venís, <strong>te sacamos la foto y te la llevás en el momento.</strong>
+          Sin esperas, sin volver otro día. Listas al instante, como las necesitás.
+        </p>
+        <a href="estudio.html" class="carnet-cta">Vení a sacártelas →</a>
+      </div>
+
+      <div class="carnet-highlight">
+        <span class="big">Sin turno previo</span>
+        <span class="small">Juan José Paso 5537</span>
+        <span class="note">Rosario, Santa Fe</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CATÁLOGO ===== -->
+  <div class="section-heading" id="productos">
+    <span class="eyebrow">La Tienda</span>
+    <h2>Tus recuerdos, hechos para durar</h2>
+  </div>
+
+  <!-- FILTROS -->
+  <div class="shop-filters">
+    <button class="filter-pill active" data-category="all">Todos</button>
+    <button class="filter-pill" data-category="fotolibros">Fotolibros</button>
+    <button class="filter-pill" data-category="cuadros">Cuadros</button>
+    <button class="filter-pill" data-category="impresiones">Impresiones</button>
+    <button class="filter-pill" data-category="regalos">Regalos</button>
+  </div>
+
+  <!-- GRILLA DE PRODUCTOS -->
+  <section class="products-section">
+    <div class="products-grid" id="productsGrid">
+      <div class="shop-empty">Cargando colección...</div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="shop-footer">
+    <p>FOTOS JACKY · Imprimí lo que más querés ·
+       <a href="sesiones.html">Sesiones fotográficas</a> ·
+       <a href="estudio.html">Fotos carnet</a>
+    </p>
+  </footer>
+
+  <script>
+    // Header con sombra al hacer scroll
+    const shopHeader = document.getElementById('shopHeader');
+    window.addEventListener('scroll', () => {
+      shopHeader.classList.toggle('scrolled', window.scrollY > 20);
+    });
+  </script>
+
+  <script type="module" src="/src/js/pages/shop.js"></script>
+</body>
+</html>

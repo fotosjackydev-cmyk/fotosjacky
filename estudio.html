@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Estudio — Fotos Jacky</title>
+  <meta name="description" content="Fotografía de estudio, retratos y bebés. Arte controlado, belleza real.">
+  <link rel="stylesheet" href="/src/css/design-system.css">
+  <link rel="stylesheet" href="/src/css/lux-theme.css">
+  <style>
+    /* Galería tipo editorial para estudio */
+    .studio-gallery { padding: 80px 0 120px; background: var(--lux-cream); }
+    .studio-gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: repeat(2, 360px);
+      gap: 12px;
+      max-width: 1280px; margin: 0 auto; padding: 0 40px;
+    }
+    .sg-item { overflow: hidden; border-radius: 4px; }
+    .sg-item img { width:100%; height:100%; object-fit:cover; transition: transform 0.7s cubic-bezier(0.16,1,0.3,1), filter 0.4s; filter:brightness(0.96); }
+    .sg-item:hover img { transform:scale(1.05); filter:brightness(1.02); }
+    .sg-item:nth-child(1) { grid-column: span 5; grid-row: span 2; }
+    .sg-item:nth-child(2) { grid-column: span 4; }
+    .sg-item:nth-child(3) { grid-column: span 3; }
+    .sg-item:nth-child(4) { grid-column: span 7; }
+
+    /* Exhibition hover-reveal */
+    .exhibition-section { padding: 120px 40px; background: var(--lux-ivory); position: relative; }
+    .exhibition-inner { max-width: 1280px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .exhibition-list { display: flex; flex-direction: column; }
+    .ex-item {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--lux-border);
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 3vw, 3rem);
+      color: var(--lux-ink);
+      cursor: pointer;
+      transition: color 0.3s, padding-left 0.3s;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .ex-item:hover { color: var(--lux-accent); padding-left: 16px; }
+    .ex-item span { font-size: 0.7rem; font-family: var(--font-body); font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--lux-muted); }
+    .exhibition-preview {
+      position: sticky; top: 200px;
+      border-radius: 8px; overflow: hidden; aspect-ratio: 3/4;
+    }
+    .exhibition-preview img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: opacity 0.5s, transform 0.7s cubic-bezier(0.16,1,0.3,1);
+    }
+
+    @media(max-width:900px){
+      .studio-gallery-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .sg-item:nth-child(1) { grid-column: span 2; height: 300px; }
+      .sg-item:nth-child(2), .sg-item:nth-child(3), .sg-item:nth-child(4) { grid-column: span 1; height: 250px; }
+      .exhibition-inner { grid-template-columns: 1fr; }
+      .exhibition-preview { display: none; }
+    }
+  </style>
+</head>
+<body class="lux-theme">
+
+  <div class="custom-cursor" id="cursor"></div>
+
+  <header class="lux-header" id="lux-header">
+    <a href="index.html" class="lux-logo">FOTOS <span>JACKY.</span></a>
+    <nav class="lux-nav">
+      <a href="quince.html">15 Años</a>
+      <a href="bodas.html">Bodas</a>
+      <a href="index.html">La Tienda</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="lux-hero">
+    <div class="lux-hero-text">
+      <span class="lux-tag">Fotografía de Estudio</span>
+      <h1 class="lux-display">Tu esencia,<br><em>revelada.</em></h1>
+      <p class="lux-editorial" style="margin-top: 32px; max-width: 400px;">
+        Retratos, familias, bebés, maternidad. Cada sesión es un espacio íntimo donde la luz hace el resto.
+      </p>
+      <div style="margin-top: 48px; display: flex; gap: 16px; flex-wrap: wrap;">
+        <a href="tienda.html" class="btn-lux btn-lux-dark">Reservar Sesión</a>
+        <a href="#galeria" class="btn-lux btn-lux-outline">Ver Galería</a>
+      </div>
+    </div>
+    <div class="lux-hero-image">
+      <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=85&w=1200" alt="Estudio">
+    </div>
+  </section>
+
+  <div class="lux-divider-accent"></div>
+
+  <!-- GALERÍA EDITORIAL -->
+  <section class="studio-gallery" id="galeria">
+    <div style="max-width:1280px; margin:0 auto; padding: 0 40px 48px;">
+      <span class="lux-number">— 01 / La Galería</span>
+      <h2 class="lux-display" style="font-size: clamp(2rem,5vw,4rem);">Luz. Forma. Emoción.</h2>
+    </div>
+    <div class="studio-gallery-grid">
+      <div class="sg-item">
+        <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&q=80&w=800" alt="Retrato">
+      </div>
+      <div class="sg-item">
+        <img src="https://images.unsplash.com/photo-1519340241574-2cec6aef0c01?auto=format&fit=crop&q=80&w=800" alt="Bebé">
+      </div>
+      <div class="sg-item">
+        <img src="https://images.unsplash.com/photo-1491013516836-7db643ee125a?auto=format&fit=crop&q=80&w=800" alt="Familia">
+      </div>
+      <div class="sg-item">
+        <img src="https://images.unsplash.com/photo-1555636222-cae831e670b3?auto=format&fit=crop&q=80&w=1200" alt="Maternidad">
+      </div>
+    </div>
+  </section>
+
+  <!-- EXHIBITION -->
+  <section class="exhibition-section">
+    <div class="exhibition-inner">
+      <div class="exhibition-list">
+        <span class="lux-number">— 02 / Las Especialidades</span>
+        <div class="ex-item" data-img="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&q=80&w=800">
+          Retratos Íntimos <span>01</span>
+        </div>
+        <div class="ex-item" data-img="https://images.unsplash.com/photo-1519340241574-2cec6aef0c01?auto=format&fit=crop&q=80&w=800">
+          Fotografía de Bebés <span>02</span>
+        </div>
+        <div class="ex-item" data-img="https://images.unsplash.com/photo-1491013516836-7db643ee125a?auto=format&fit=crop&q=80&w=800">
+          Sesiones Familiares <span>03</span>
+        </div>
+        <div class="ex-item" data-img="https://images.unsplash.com/photo-1555636222-cae831e670b3?auto=format&fit=crop&q=80&w=800">
+          Maternidad <span>04</span>
+        </div>
+      </div>
+      <div class="exhibition-preview">
+        <img id="previewImg" src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?auto=format&fit=crop&q=80&w=800" alt="Preview">
+      </div>
+    </div>
+  </section>
+
+  <!-- QUOTE -->
+  <div class="lux-quote-section">
+    <p class="lux-quote">"La mejor foto no es la más técnica. Es la que te hace sentir <em>algo</em>."</p>
+    <div class="lux-quote-author">— Fotos Jacky Studio</div>
+  </div>
+
+  <footer class="lux-footer">
+    <a href="index.html" class="lux-logo">FOTOS <span>JACKY.</span></a>
+    <p>© 2026 Fotos Jacky. Todos los derechos reservados.</p>
+    <a href="tienda.html">Ver Paquetes →</a>
+  </footer>
+
+  <script>
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+
+    const hdr = document.getElementById('lux-header');
+    window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', window.scrollY > 50));
+
+    // Exhibition hover → preview image swap
+    const exItems = document.querySelectorAll('.ex-item');
+    const previewImg = document.getElementById('previewImg');
+    exItems.forEach(item => {
+      item.addEventListener('mouseenter', () => {
+        previewImg.style.opacity = '0';
+        previewImg.style.transform = 'scale(1.04)';
+        setTimeout(() => {
+          previewImg.src = item.dataset.img;
+          previewImg.style.opacity = '1';
+          previewImg.style.transform = 'scale(1)';
+        }, 200);
+      });
+    });
+  </script>
+</body>
+</html>

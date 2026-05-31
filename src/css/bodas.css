@@ -1,0 +1,142 @@
+/* =============================================================================
+   BODAS — CSS ESPECÍFICO
+   ============================================================================= */
+
+/* --- HERO TYPEWRITER --- */
+.hero-bodas {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-bodas img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.6) grayscale(30%);
+}
+
+.typewriter-container {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+}
+
+.typewriter-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 7vw, 9rem);
+  color: var(--white);
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.typewriter-subtitle {
+  font-family: var(--font-editorial);
+  font-size: clamp(1.2rem, 2vw, 2rem);
+  color: var(--turquoise);
+  margin-top: 16px;
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 2px solid var(--turquoise);
+  animation: typing 3s steps(40, end), blink-caret .75s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: var(--turquoise); }
+}
+
+/* --- MASONRY PARALLAX --- */
+.masonry-section {
+  padding: 150px 0;
+  background: var(--indigo-deep);
+  position: relative;
+}
+
+.masonry-grid {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.masonry-column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Aplicaremos un transform via JS basado en el scroll.
+   Pero podemos darle una posición inicial desfasada */
+.masonry-column:nth-child(2) {
+  margin-top: 100px;
+}
+.masonry-column:nth-child(3) {
+  margin-top: -50px;
+}
+
+.masonry-item {
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+
+.masonry-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s var(--ease-out);
+}
+.masonry-item:hover img {
+  transform: scale(1.05);
+}
+
+/* Diferentes alturas para asimetría */
+.h-small { height: 300px; }
+.h-med { height: 450px; }
+.h-large { height: 600px; }
+
+/* --- NARRATIVA SCROLL --- */
+.narrativa-section {
+  position: relative;
+  background: #000;
+  color: #fff;
+  padding: 200px 0;
+  text-align: center;
+}
+
+.narrativa-text {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 4rem);
+  max-width: 800px;
+  margin: 0 auto 100px;
+  opacity: 0.3;
+  transition: opacity 0.8s;
+}
+.narrativa-text.visible {
+  opacity: 1;
+  background: var(--grad-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media (max-width: 768px) {
+  .masonry-grid { flex-direction: column; }
+  .masonry-column { margin-top: 0 !important; transform: none !important; }
+}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sesiones — Fotos Jacky</title>
+  <meta name="description" content="Fotografía disruptiva para 15 Años, Bodas y Estudio.">
+  <link rel="stylesheet" href="/src/css/design-system.css">
+  <link rel="stylesheet" href="/src/css/home-v2.css">
+</head>
+<body>
+
+  <!-- Cursor Personalizado -->
+  <div class="custom-cursor" id="cursor"></div>
+
+  <!-- Header Minimalista -->
+  <header class="header">
+    <a href="index.html" class="logo">FOTOS JACKY.</a>
+    <nav class="nav-right">
+      <a href="index.html">La Tienda</a>
+      <a href="estudio.html">Contacto</a>
+    </nav>
+  </header>
+
+  <!-- Portales Inmersivos -->
+  <main class="portals-container">
+
+    <!-- Portal: 15 Años -->
+    <a href="quince.html" class="portal">
+      <img src="https://images.unsplash.com/photo-1510520434124-5bc7e642b61d?auto=format&fit=crop&q=80&w=1000" alt="15 Años" class="portal-bg">
+      <div class="portal-overlay"></div>
+      <div class="portal-content">
+        <h2 class="portal-title">15 Años</h2>
+        <p class="portal-subtitle">Un cuento de hadas escrito en luz.</p>
+      </div>
+    </a>
+
+    <!-- Portal: Bodas -->
+    <a href="bodas.html" class="portal">
+      <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=1000" alt="Bodas" class="portal-bg">
+      <div class="portal-overlay"></div>
+      <div class="portal-content">
+        <h2 class="portal-title">Bodas</h2>
+        <p class="portal-subtitle">El amor merece ser eterno.</p>
+      </div>
+    </a>
+
+    <!-- Portal: Estudio -->
+    <a href="estudio.html" class="portal">
+      <img src="https://images.unsplash.com/photo-1554046920-90dcac824c08?auto=format&fit=crop&q=80&w=1000" alt="Estudio" class="portal-bg">
+      <div class="portal-overlay"></div>
+      <div class="portal-content">
+        <h2 class="portal-title">Estudio</h2>
+        <p class="portal-subtitle">Tu esencia, revelada.</p>
+      </div>
+    </a>
+
+  </main>
+
+  <script>
+    // Lógica simple para el cursor personalizado
+    const cursor = document.getElementById('cursor');
+    const portals = document.querySelectorAll('.portal');
+
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+
+    portals.forEach(portal => {
+      portal.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+      portal.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+    });
+  </script>
+</body>
+</html>

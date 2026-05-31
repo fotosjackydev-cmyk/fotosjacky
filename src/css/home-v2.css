@@ -1,0 +1,181 @@
+/* =============================================================================
+   HOME V2 — DISRUPTIVE DESIGN
+   ============================================================================= */
+
+body {
+  margin: 0;
+  overflow: hidden; /* Evitamos scroll por defecto en home, todo es inmersivo */
+  background-color: var(--indigo-deep);
+}
+
+/* --- PORTALS CONTAINER --- */
+.portals-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  transition: all 0.8s var(--ease-out);
+}
+
+/* --- PORTAL ITEM --- */
+.portal {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: flex 0.6s var(--ease-out), filter 0.6s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  filter: grayscale(80%) contrast(1.2);
+}
+
+.portal:hover {
+  flex: 1.5;
+  filter: grayscale(0%) contrast(1.1);
+}
+
+/* Oscurecemos los no hoveados */
+.portals-container:hover .portal:not(:hover) {
+  filter: grayscale(100%) brightness(0.4);
+}
+
+/* --- BACKGROUND IMAGE --- */
+.portal-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.2s var(--ease-out);
+  transform: scale(1.05);
+}
+.portal:hover .portal-bg {
+  transform: scale(1.1);
+}
+
+/* --- OVERLAY GRADIENT --- */
+.portal-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--grad-portal);
+  opacity: 0.8;
+  transition: opacity 0.6s;
+}
+.portal:hover .portal-overlay {
+  opacity: 0.4;
+  background: linear-gradient(0deg, rgba(13,11,30,0.9) 0%, rgba(67,97,238,0.2) 100%);
+}
+
+/* --- CONTENT --- */
+.portal-content {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  padding-bottom: 10vh;
+  transform: translateY(20px);
+  transition: transform 0.6s var(--ease-out);
+}
+.portal:hover .portal-content {
+  transform: translateY(0);
+}
+
+.portal-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 5vw, 6rem);
+  font-weight: 900;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+  opacity: 0.9;
+  transition: opacity 0.3s, transform 0.3s;
+}
+.portal:hover .portal-title {
+  opacity: 1;
+  transform: scale(1.05);
+  background: var(--grad-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.portal-subtitle {
+  font-family: var(--font-editorial);
+  font-size: clamp(1rem, 1.5vw, 1.5rem);
+  color: var(--white-soft);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.4s var(--ease-out) 0.1s;
+}
+.portal:hover .portal-subtitle {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- HEADER TRANSPARENTE EN HOME --- */
+.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+  padding: 32px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  mix-blend-mode: difference;
+}
+
+.header .logo {
+  font-size: 1.5rem;
+  color: #fff;
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+
+.header .nav-right a {
+  color: #fff;
+  text-decoration: none;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-left: 32px;
+  position: relative;
+}
+.header .nav-right a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #fff;
+  transition: width 0.3s;
+}
+.header .nav-right a:hover::after {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .portals-container {
+    flex-direction: column;
+  }
+  .portal {
+    height: 33.33vh;
+  }
+  .portal:hover {
+    flex: 2; /* Expande verticalmente en móvil */
+  }
+  .portal-title {
+    font-size: 3rem;
+  }
+}

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>15 Años — Fotos Jacky</title>
+  <meta name="description" content="Fotografía de 15 años elegante y disruptiva. Capturamos tu noche mágica.">
+  <link rel="stylesheet" href="/src/css/design-system.css">
+  <link rel="stylesheet" href="/src/css/lux-theme.css">
+  <style>
+    /* ===== CARRUSEL HORIZONTAL ===== */
+    .horizontal-scroll-section {
+      height: 400vh;
+      position: relative;
+      /* Imagen bokeh generada con IA como fondo del carrusel */
+      background: url('/static/images/bokeh-bg.png') center / cover fixed;
+    }
+
+    .sticky-container {
+      position: sticky; top: 0;
+      height: 100vh; width: 100vw;
+      overflow: hidden; display: flex; align-items: center;
+      z-index: 1;
+    }
+    .gallery-track {
+      display: flex;
+      gap: 32px;
+      padding: 0 10vw;
+      will-change: transform;
+    }
+    .gallery-item {
+      flex: 0 0 55vw;
+      height: 72vh;
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+    }
+    .gallery-item:nth-child(even) { height: 52vh; align-self: center; }
+    .gallery-item:nth-child(3n)   { height: 82vh; align-self: flex-start; }
+    .gallery-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: filter 0.5s;
+    }
+    .gallery-item:hover img { filter: brightness(1.05); }
+    .gallery-caption {
+      position: absolute; bottom: 28px; left: 28px;
+      font-family: var(--font-editorial);
+      font-size: 1.8rem; font-style: italic;
+      color: var(--lux-charcoal);
+      mix-blend-mode: multiply;
+    }
+
+    /* Sección de texto narrativo */
+    .narrative-strip {
+      background: var(--lux-charcoal);
+      padding: 120px 0;
+      overflow: hidden;
+    }
+    .narrative-strip .lux-display { color: var(--lux-ivory); }
+    .narrative-strip .lux-editorial { color: rgba(245,242,237,0.6); }
+    .narrative-strip-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 80px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    @media(max-width:768px){
+      .narrative-strip-inner{grid-template-columns:1fr;padding:0 32px;gap:40px;}
+    }
+  </style>
+</head>
+<body class="lux-theme">
+
+  <div class="custom-cursor" id="cursor"></div>
+
+  <!-- HEADER LUX -->
+  <header class="lux-header" id="lux-header">
+    <a href="index.html" class="lux-logo">FOTOS <span>JACKY.</span></a>
+    <nav class="lux-nav">
+      <a href="bodas.html">Bodas</a>
+      <a href="estudio.html">Estudio</a>
+      <a href="index.html">La Tienda</a>
+    </nav>
+  </header>
+
+  <!-- HERO SPLIT -->
+  <section class="lux-hero">
+    <div class="lux-hero-text">
+      <span class="lux-tag">Fotografía de 15 Años</span>
+      <h1 class="lux-display">
+        La noche<br>más<br><em>mágica.</em>
+      </h1>
+      <p class="lux-editorial" style="margin-top: 32px; max-width: 420px;">
+        Una sola oportunidad para capturar la versión más radiante de quien sos. Lo hacemos con arte.
+      </p>
+      <div style="margin-top: 48px; display: flex; gap: 16px; flex-wrap: wrap;">
+        <a href="tienda.html" class="btn-lux btn-lux-dark">Ver Paquetes</a>
+        <a href="#galeria" class="btn-lux btn-lux-outline">Ver Galería</a>
+      </div>
+    </div>
+    <div class="lux-hero-image">
+      <img src="https://images.unsplash.com/photo-1510520434124-5bc7e642b61d?auto=format&fit=crop&q=85&w=1200" alt="15 Años">
+    </div>
+  </section>
+
+  <div class="lux-divider-accent"></div>
+
+  <!-- GALERÍA HORIZONTAL SCROLL -->
+  <div id="galeria">
+    <div style="padding: 80px 80px 40px; background: var(--lux-cream);">
+      <span class="lux-number">— 01 / La Sesión</span>
+      <h2 class="lux-display" style="font-size: clamp(2rem, 5vw, 4rem);">
+        Cada frame,<br>una obra.
+      </h2>
+    </div>
+    <section class="horizontal-scroll-section" id="scrollSection">
+      <div class="sticky-container">
+        <div class="gallery-track" id="galleryTrack">
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?auto=format&fit=crop&q=80&w=1200" alt="La Preparación">
+            <div class="gallery-caption">La Preparación</div>
+          </div>
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1549476464-37392f717541?auto=format&fit=crop&q=80&w=1200" alt="El Vestido">
+            <div class="gallery-caption">El Vestido</div>
+          </div>
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1542038583-0599c4eaebcf?auto=format&fit=crop&q=80&w=1200" alt="La Entrada">
+            <div class="gallery-caption">La Entrada</div>
+          </div>
+          <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?auto=format&fit=crop&q=80&w=1200" alt="El Brindis">
+            <div class="gallery-caption">El Brindis</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- QUOTE EDITORIAL -->
+  <div class="lux-quote-section">
+    <p class="lux-quote">
+      "No son fotos.<br>Son el recuerdo de cómo<br>te sentiste en tu mejor noche."
+    </p>
+    <div class="lux-quote-author">— Fotos Jacky Studio</div>
+  </div>
+
+  <div class="lux-divider"></div>
+
+  <!-- FRANJA OSCURA (contraste) -->
+  <section class="narrative-strip">
+    <div class="narrative-strip-inner">
+      <div>
+        <span class="lux-number" style="color: rgba(245,242,237,0.4);">— 02 / El proceso</span>
+        <h2 class="lux-display" style="font-size: clamp(2rem, 4vw, 3.5rem);">
+          Un equipo que hace que todo fluya.
+        </h2>
+      </div>
+      <p class="lux-editorial">
+        Desde la planificación de la sesión previa hasta la entrega del álbum. 
+        Coordinamos cada detalle para que vos solo tengas que disfrutarlo.
+      </p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="lux-footer">
+    <a href="index.html" class="lux-logo">FOTOS <span>JACKY.</span></a>
+    <p>© 2026 Fotos Jacky. Todos los derechos reservados.</p>
+    <a href="tienda.html">Ver Paquetes →</a>
+  </footer>
+
+  <script>
+    // Cursor
+    const cursor = document.getElementById('cursor');
+    document.addEventListener('mousemove', e => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+
+    // Header scroll
+    const hdr = document.getElementById('lux-header');
+    window.addEventListener('scroll', () => hdr.classList.toggle('scrolled', window.scrollY > 50));
+
+    // Scroll horizontal
+    const scrollSection = document.getElementById('scrollSection');
+    const track = document.getElementById('galleryTrack');
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY - scrollSection.offsetTop;
+      const maxScroll = scrollSection.offsetHeight - window.innerHeight;
+      if (scrolled >= 0 && scrolled <= maxScroll) {
+        const progress = scrolled / maxScroll;
+        const moveAmount = (track.scrollWidth - window.innerWidth) * progress;
+        track.style.transform = `translateX(-${moveAmount}px)`;
+      }
+    });
+  </script>
+</body>
+</html>

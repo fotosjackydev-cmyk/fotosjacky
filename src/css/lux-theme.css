@@ -1,0 +1,368 @@
+/* =============================================================================
+   TEMA LUX — Elegante, luminoso, atemporal
+   Para páginas: quince.html, bodas.html, estudio.html
+   
+   Paleta: Marfil Cálido + Carbón Suave + Acento Violeta/Turquesa muy sutil
+   Inspiración: Vogue, Harper's Bazaar, AD Magazine
+   ============================================================================= */
+
+/* --- Variables de Override para el tema Lux --- */
+:root {
+  --lux-ivory:       #F5F2ED;   /* Marfil cálido — no blanco, tiene calidez */
+  --lux-cream:       #EDE9E3;   /* Crema profundo para secciones alternas */
+  --lux-charcoal:    #1C1A28;   /* Casi negro con tinte violeta, mantiene ADN */
+  --lux-ink:         #3D3952;   /* Gris pizarra con matiz violeta suave */
+  --lux-muted:       #8C8799;   /* Texto secundario, elegante */
+  --lux-accent:      #6C3EAE;   /* Violeta — idéntico al design system, poca presencia */
+  --lux-teal:        #06D6A0;   /* Turquesa — solo para detalles muy finos */
+  --lux-border:      rgba(28, 26, 40, 0.08);
+  --lux-border-dark: rgba(28, 26, 40, 0.15);
+
+  /* Gradiente de texto adaptado al fondo claro */
+  --lux-grad-text: linear-gradient(135deg, #6C3EAE, #4361EE);
+}
+
+/* --- BODY OVERRIDE --- */
+body.lux-theme {
+  background-color: var(--lux-ivory);
+  color: var(--lux-charcoal);
+}
+
+/* --- CURSOR (adaptado a fondo claro) --- */
+body.lux-theme .custom-cursor {
+  background: var(--lux-accent);
+  mix-blend-mode: multiply; /* Se ve bien sobre fondo claro */
+}
+
+/* --- HEADER PARA PÁGINAS LUX --- */
+.lux-header {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 28px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.lux-header.scrolled {
+  background: rgba(245, 242, 237, 0.92);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--lux-border-dark);
+  padding: 18px 40px;
+}
+
+.lux-logo {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 1.2rem;
+  color: var(--lux-charcoal);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+.lux-logo span { color: var(--lux-accent); }
+
+.lux-nav {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.lux-nav a {
+  color: var(--lux-ink);
+  text-decoration: none;
+  font-size: 0.78rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  transition: color 0.2s;
+  position: relative;
+}
+.lux-nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 1px;
+  background: var(--lux-accent);
+  transition: width 0.3s;
+}
+.lux-nav a:hover { color: var(--lux-accent); }
+.lux-nav a:hover::after { width: 100%; }
+
+/* =========================================================
+   COMPONENTES GENÉRICOS LUX (COMPARTIDOS)
+   ========================================================= */
+
+/* Etiqueta / Tag */
+.lux-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--lux-accent);
+  padding: 6px 14px;
+  border: 1px solid rgba(108, 62, 174, 0.25);
+  border-radius: 100px;
+  margin-bottom: 24px;
+}
+.lux-tag::before {
+  content: '';
+  width: 5px; height: 5px;
+  background: var(--lux-teal);
+  border-radius: 50%;
+}
+
+/* Título principal */
+.lux-display {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 8vw, 9rem);
+  font-weight: 900;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: var(--lux-charcoal);
+}
+.lux-display em {
+  font-style: italic;
+  background: var(--lux-grad-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Texto editorial */
+.lux-editorial {
+  font-family: var(--font-editorial);
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-style: italic;
+  color: var(--lux-muted);
+  line-height: 1.65;
+}
+
+/* Divisor fino */
+.lux-divider {
+  height: 1px;
+  background: var(--lux-border-dark);
+  margin: 0;
+}
+.lux-divider-accent {
+  height: 1px;
+  background: linear-gradient(90deg, var(--lux-accent), var(--lux-teal), transparent);
+  opacity: 0.4;
+}
+
+/* Botón Lux */
+.btn-lux {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 32px;
+  border-radius: 100px;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.btn-lux-dark {
+  background: var(--lux-charcoal);
+  color: var(--lux-ivory);
+}
+.btn-lux-dark:hover {
+  background: var(--lux-accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(108,62,174,0.25);
+}
+.btn-lux-outline {
+  background: transparent;
+  color: var(--lux-charcoal);
+  border: 1.5px solid var(--lux-border-dark);
+}
+.btn-lux-outline:hover {
+  border-color: var(--lux-accent);
+  color: var(--lux-accent);
+}
+
+/* Número numerado en texto */
+.lux-number {
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  color: var(--lux-muted);
+  margin-bottom: 16px;
+  display: block;
+}
+
+/* =========================================================
+   SECCIÓN HERO (fondo claro con imagen a la derecha)
+   ========================================================= */
+.lux-hero {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+}
+
+.lux-hero-text {
+  padding: 160px 80px 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  background: var(--lux-ivory);
+}
+
+.lux-hero-image {
+  position: relative;
+  overflow: hidden;
+}
+.lux-hero-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 8s ease;
+}
+.lux-hero-image:hover img { transform: scale(1.03); }
+
+/* Sutilísimo gradient de imagen a fondo */
+.lux-hero-image::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(270deg, transparent 70%, var(--lux-ivory) 100%);
+  z-index: 1;
+}
+
+/* =========================================================
+   GALERÍA LUX (Masonry clara con borde sutil)
+   ========================================================= */
+.lux-gallery-section {
+  padding: 120px 0;
+  background: var(--lux-cream);
+}
+
+.lux-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
+  gap: 16px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.lux-gallery-item {
+  overflow: hidden;
+  border-radius: 4px; /* Sutil, casi cuadrado — más editorial */
+}
+.lux-gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s;
+  filter: brightness(0.97);
+}
+.lux-gallery-item:hover img {
+  transform: scale(1.04);
+  filter: brightness(1);
+}
+
+/* Alturas variables para asimetría */
+.lux-gallery-item.tall { height: 560px; }
+.lux-gallery-item.med  { height: 400px; }
+.lux-gallery-item.short{ height: 280px; }
+
+/* Primer item ocupa 2 columnas */
+.lux-gallery-item:first-child {
+  grid-column: span 2;
+  height: 500px;
+}
+
+/* =========================================================
+   TEXTO NARRATIVO (Quote de impacto)
+   ========================================================= */
+.lux-quote-section {
+  padding: 160px 40px;
+  text-align: center;
+  background: var(--lux-ivory);
+  max-width: 900px;
+  margin: 0 auto;
+}
+.lux-quote {
+  font-family: var(--font-editorial);
+  font-size: clamp(2rem, 4.5vw, 4rem);
+  font-style: italic;
+  line-height: 1.3;
+  color: var(--lux-charcoal);
+}
+.lux-quote em {
+  font-style: normal;
+  background: var(--lux-grad-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.lux-quote-author {
+  margin-top: 32px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--lux-muted);
+}
+
+/* =========================================================
+   FOOTER MÍNIMO LUX
+   ========================================================= */
+.lux-footer {
+  background: var(--lux-charcoal);
+  padding: 60px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.lux-footer .lux-logo { color: var(--lux-ivory); }
+.lux-footer p {
+  color: rgba(245,242,237,0.4);
+  font-size: 0.8rem;
+}
+.lux-footer a {
+  color: var(--lux-teal);
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 900px) {
+  .lux-hero {
+    grid-template-columns: 1fr;
+    grid-template-rows: 60vh auto;
+  }
+  .lux-hero-text { padding: 60px 32px 60px; order: 2; justify-content: flex-start; }
+  .lux-hero-image { order: 1; }
+  .lux-hero-image::before { display: none; }
+  .lux-gallery-grid { grid-template-columns: repeat(2, 1fr); padding: 0 20px; }
+  .lux-gallery-item:first-child { grid-column: span 2; height: 350px; }
+  .lux-header { padding: 20px 24px; }
+  .lux-nav { display: none; }
+  .lux-footer { flex-direction: column; gap: 24px; text-align: center; padding: 48px 24px; }
+}
+@media (max-width: 600px) {
+  .lux-gallery-grid { grid-template-columns: 1fr; }
+  .lux-gallery-item:first-child { grid-column: span 1; height: 280px; }
+  .lux-gallery-item.tall, .lux-gallery-item.med { height: 280px; }
+}

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fotos Jacky — Panel de Administración</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/admin/css/admin.css">
+</head>
+<body>
+
+    <!-- ====================================================================
+         LOGIN SCREEN
+    ==================================================================== -->
+    <div id="login-screen" class="login-screen">
+        <div class="login-card">
+            <div class="login-header">
+                <div class="login-logo">📸</div>
+                <h1>Fotos Jacky</h1>
+                <p>Panel de Administración</p>
+            </div>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-user">Usuario</label>
+                    <input type="text" id="login-user" placeholder="Tu usuario" required autocomplete="username">
+                </div>
+                <div class="form-group">
+                    <label for="login-pass">Contraseña</label>
+                    <input type="password" id="login-pass" placeholder="Tu contraseña" required autocomplete="current-password">
+                </div>
+                <button type="submit" class="btn btn-primary btn-full" id="login-btn">
+                    Iniciar sesión
+                </button>
+                <p id="login-error" class="error-text" style="display:none"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- ====================================================================
+         MAIN APP (hidden until login)
+    ==================================================================== -->
+    <div id="app" class="app" style="display:none">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <span class="sidebar-logo">📸</span>
+                <span class="sidebar-title">Fotos Jacky</span>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#dashboard" class="nav-item active" data-section="dashboard">
+                    <span class="nav-icon">📊</span> Dashboard
+                </a>
+                <a href="#products" class="nav-item" data-section="products">
+                    <span class="nav-icon">📦</span> Productos
+                </a>
+                <a href="#categories" class="nav-item" data-section="categories">
+                    <span class="nav-icon">🏷️</span> Categorías
+                </a>
+                <a href="#orders" class="nav-item" data-section="orders">
+                    <span class="nav-icon">🛒</span> Órdenes
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <button class="btn-logout" id="logout-btn">
+                    🚪 Cerrar sesión
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- ============================================================
+                 DASHBOARD
+            ============================================================ -->
+            <section id="section-dashboard" class="section active">
+                <div class="section-header">
+                    <h2>Dashboard</h2>
+                    <p class="section-subtitle">Resumen general de tu tienda</p>
+                </div>
+                <div class="metrics-grid" id="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-icon">📦</div>
+                        <div class="metric-value" id="metric-products">—</div>
+                        <div class="metric-label">Productos</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-icon">🏷️</div>
+                        <div class="metric-value" id="metric-categories">—</div>
+                        <div class="metric-label">Categorías</div>
+                    </div>
+                    <div class="metric-card accent">
+                        <div class="metric-icon">🛒</div>
+                        <div class="metric-value" id="metric-orders">—</div>
+                        <div class="metric-label">Órdenes totales</div>
+                    </div>
+                    <div class="metric-card warning">
+                        <div class="metric-icon">⏳</div>
+                        <div class="metric-value" id="metric-pending">—</div>
+                        <div class="metric-label">Pendientes de envío</div>
+                    </div>
+                </div>
+
+                <div class="card" style="margin-top:24px">
+                    <h3>📋 Últimas órdenes</h3>
+                    <div id="dashboard-recent-orders">
+                        <p class="text-muted">Cargando...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ============================================================
+                 PRODUCTS
+            ============================================================ -->
+            <section id="section-products" class="section">
+                <div class="section-header">
+                    <h2>Productos</h2>
+                    <button class="btn btn-primary" id="btn-new-product">
+                        + Nuevo producto
+                    </button>
+                </div>
+
+                <div class="table-wrapper" id="products-list">
+                    <p class="text-muted">Cargando productos...</p>
+                </div>
+            </section>
+
+            <!-- ============================================================
+                 CATEGORIES
+            ============================================================ -->
+            <section id="section-categories" class="section">
+                <div class="section-header">
+                    <h2>Categorías</h2>
+                    <button class="btn btn-primary" id="btn-new-category">
+                        + Nueva categoría
+                    </button>
+                </div>
+
+                <div class="table-wrapper" id="categories-list">
+                    <p class="text-muted">Cargando categorías...</p>
+                </div>
+            </section>
+
+            <!-- ============================================================
+                 ORDERS
+            ============================================================ -->
+            <section id="section-orders" class="section">
+                <div class="section-header">
+                    <h2>Órdenes</h2>
+                    <div class="filter-bar">
+                        <select id="order-status-filter" class="select-input">
+                            <option value="">Todos los estados</option>
+                            <option value="pending_payment">⏳ Pendiente de pago</option>
+                            <option value="paid">💳 Pagado</option>
+                            <option value="preparing">📦 Preparando</option>
+                            <option value="shipped">🚚 Enviado</option>
+                            <option value="delivered">✅ Entregado</option>
+                            <option value="cancelled">❌ Cancelado</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="table-wrapper" id="orders-list">
+                    <p class="text-muted">Cargando órdenes...</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- ====================================================================
+         MODAL (for creating/editing items)
+    ==================================================================== -->
+    <div id="modal-overlay" class="modal-overlay" style="display:none">
+        <div class="modal" id="modal">
+            <div class="modal-header">
+                <h3 id="modal-title">Título</h3>
+                <button class="modal-close" id="modal-close">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Dynamic content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast notifications -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <script src="/admin/js/admin.js"></script>
+</body>
+</html>

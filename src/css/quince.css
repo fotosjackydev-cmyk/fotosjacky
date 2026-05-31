@@ -1,0 +1,144 @@
+/* =============================================================================
+   15 AÑOS — CSS ESPECÍFICO
+   ============================================================================= */
+
+/* --- HERO CON BLEND MODE --- */
+.hero-quince {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #000;
+  overflow: hidden;
+}
+
+.hero-quince img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(100%);
+  opacity: 0.8;
+}
+
+.hero-quince h1 {
+  position: relative;
+  z-index: 10;
+  font-family: var(--font-display);
+  font-size: clamp(4rem, 10vw, 12rem);
+  text-transform: uppercase;
+  color: #fff;
+  mix-blend-mode: difference;
+  text-align: center;
+  line-height: 0.9;
+  letter-spacing: -0.05em;
+  margin: 0;
+  padding: 0 20px;
+}
+
+/* --- SCROLL HORIZONTAL GALLERY --- */
+.horizontal-scroll-section {
+  height: 400vh; /* Permite scroll largo */
+  background: var(--indigo-deep);
+  position: relative;
+}
+
+.sticky-container {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.gallery-track {
+  display: flex;
+  gap: 10vw;
+  padding: 0 20vw;
+  will-change: transform;
+}
+
+.gallery-item {
+  flex: 0 0 60vw;
+  height: 70vh;
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(40%);
+  transition: filter 0.5s;
+}
+
+.gallery-item:hover img {
+  filter: grayscale(0%);
+}
+
+.gallery-caption {
+  position: absolute;
+  bottom: 32px;
+  left: 32px;
+  color: var(--white);
+  font-family: var(--font-editorial);
+  font-size: 2rem;
+}
+
+/* Variaciones de altura para ritmo visual */
+.gallery-item:nth-child(even) {
+  height: 50vh;
+  align-self: center;
+}
+.gallery-item:nth-child(3n) {
+  height: 80vh;
+  align-self: flex-start;
+}
+
+/* --- SPLIT SCREEN MAGIA --- */
+.magia-section {
+  padding: var(--section-padding) 0;
+  background: var(--indigo-mid);
+}
+
+.split-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 80vh;
+  margin-bottom: 20vh;
+}
+
+.split-text {
+  padding: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.split-image-wrapper {
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.split-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 1.5s var(--ease-out);
+}
+.split-image-wrapper:hover img {
+  transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+  .gallery-item { flex: 0 0 85vw; }
+  .split-block { grid-template-columns: 1fr; min-height: auto; gap: 40px; }
+  .split-text { padding: 5%; }
+}

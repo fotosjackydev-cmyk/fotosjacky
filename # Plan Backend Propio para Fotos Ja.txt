@@ -1,0 +1,455 @@
+# Plan: Backend Propio para Fotos Jacky Ecommerce
+
+## Contexto y Motivación
+
+Tienda Nube cobra $80.000 ARS/mes por alojar la tienda. El objetivo es construir un
+**backend propio y autoalojado** que replique (y supere) esas capacidades, manteniendo
+el frontend premium ya desarrollado (JackyV2) y conectándolo a infraestructura gratuita
+o de costo mínimo.
+
+El stack está elegido para que **vos puedas administrarlo** con mi ayuda en el futuro,
+sin depender de plataformas cerradas.
+
+---
+
+## Stack Tecnológico Elegido
+
+| Capa | Tecnología | Por qué |
+|---|---|---|
+| **Frontend** | HTML + Vanilla JS/CSS (JackyV2 existente) | Ya construido, solo hay que adaptarlo |
+| **Backend API** | **FastAPI** (Python) | Simple, rápido, ideal para ecommerce REST API |
+| **Base de datos** | **PostgreSQL** via **Supabase** (free tier) | Gratuito hasta 500MB, panel visual, auth incluida |
+| **Almacenamiento de imágenes** | **Supabase Storage** o **Cloudinary** (free) | CDN global, transformaciones de imagen |
+| **Pagos** | **Mercado Pago Checkout Pro** | API oficial, compatible con Argentina |
+| **Envíos** | **Andreani API** + **OCA e-Pak** + **Correo Argentino** | Los 3 couriers principales de Argentina |
+| **Hosting Backend** | **Railway.app** (free tier) o **Render.com** | Deploy automático desde GitHub, SSL gratis |
+| **Hosting Frontend** | **Vercel** o **Netlify** (free) | Deploy estático, CDN global |
+| **Auth Admin** | JWT + bcrypt | Panel de administración para Jacky |
+
+---
+
+## Arquitectura General
+
+```
+[Frontend JackyV2]  ←──────────────────────────────────────────────────────
+    HTML/CSS/JS                                                            |
+    Vercel/Netlify                                                         |
+         |                                                                 |
+         | HTTP REST                                                       |
+         ↓                                                                 |
+[Backend FastAPI]  ←──── Railway/Render                                   |
+    /api/products                                                          |
+    /api/cart                                                              |
+    /api/checkout                                                          |
+    /api/orders                                                            |
+    /api/admin/*                                                           |
+         |                    |                    |                       |
+         ↓                    ↓                    ↓                       |
+[PostgreSQL]          [Mercado Pago]         [Andreani/OCA]                |
+  Supabase              Checkout Pro          Cotización y                 |
+  (gratuito)            (webhook)             etiquetas                   |
+         |                                                                 |
+         ↓                                                                 |
+[Storage]                                                                  |
+  Supabase/Cloudinary                                                      |
+  Imágenes de productos ──────────────────────────────────────────────────
+```
+
+---
+
+## Módulos del Backend — Detalle Completo
+
+### Módulo 1: Productos y Categorías
+
+**Entidades en la base de datos:**
+- `categories` — Cuadros, Fotolibros, Impresiones, Regalos
+- `products` — Con título, descripción, precio, SKU, stock, imágenes
+- `product_variants` — Tamaños (10x15, A4, A3, etc.), acabados (mate/brillo), etc.
+- `product_images` — Múltiples fotos por producto con orden
+
+**Endpoints:**
+```
+GET  /api/products              → Listar productos (con filtros y paginación)
+GET  /api/products/{slug}       → Detalle de un producto
+GET  /api/categories            → Listar categorías
+GET  /api/categories/{slug}     → Productos por categoría
+POST /api/admin/products        → Crear producto (auth requerida)
+PUT  /api/admin/products/{id}   → Editar producto
+DEL  /api/admin/products/{id}   → Eliminar producto
+```
+
+---
+
+### Módulo 2: Carrito de Compras
+
+**Funcionamiento:** El carrito se guarda en `localStorage` del browser. No requiere login.
+Antes de hacer checkout, se valida stock en el servidor.
+
+**Endpoints:**
+```
+POST /api/cart/validate          → Valida items del carrito (stock, precios)
+```
+
+---
+
+### Módulo 3: Clientes y Órdenes
+
+**Entidades:**
+- `customers` — Email, nombre, DNI, teléfono, dirección
+- `orders` — Estado, items, subtotal, envío, total, payment_id de MP
+- `order_items` — Producto, variante, cantidad, precio unitario
+- `order_status_history` — Trazabilidad de cambios de estado
+
+**Estados de una orden:**
+```
+pending_payment → paid → preparing → shipped → delivered
+                      ↘ cancelled / refunded
+```
+
+**Endpoints:**
+```
+POST /api/checkout               → Crea orden + inicia pago en MP
+GET  /api/orders/{order_id}      → Estado de una orden (pública, con token)
+GET  /api/admin/orders           → Listar todas las órdenes
+PUT  /api/admin/orders/{id}      → Actualizar estado, cargar número de envío
+```
+
+---
+
+### Módulo 4: Pagos con Mercado Pago
+
+**Flujo completo:**
+
+```
+1. Cliente llena datos → POST /api/checkout
+2. Backend crea preferencia en MP con:
+   - Items del carrito
+   - Datos del cliente
+   - URLs de retorno (éxito/error/pendiente)
+   - Webhook URL para notificaciones
+3. Backend devuelve init_point (URL de pago de MP)
+4. Frontend redirige al checkout de MP
+5. Cliente paga (tarjeta, débito, transferencia, efectivo)
+6. MP notifica al webhook: POST /api/webhooks/mercadopago
+7. Backend confirma pago, actualiza estado de orden
+8. Se envía email de confirmación al cliente
+```
+
+**Métodos de pago soportados automáticamente por MP:**
+- 💳 Tarjetas de crédito (Visa, Mastercard, Amex, Naranja, etc.)
+- 🏦 Tarjetas de débito
+- 📱 Transferencia bancaria / CVU (Alias/CBU)
+- 💵 Efectivo (Rapipago, PagoFácil)
+- 📲 Mercado Crédito (cuotas sin tarjeta)
+
+**Comisión MP:** 5,99% por venta (sin comisión mensual fija).
+
+---
+
+### Módulo 5: Envíos
+
+**Estrategia:** Calculamos cotización en tiempo real antes del pago, con múltiples opciones.
+
+#### Couriers integrados:
+
+**a) Andreani (recomendado principal)**
+- API REST moderna, documentación clara
+- Cobertura nacional
+- Retiro en sucursal o domicilio
+- Tracking incluido
+- Requiere cuenta de empresa (gratuito)
+
+**b) OCA e-Pak**
+- API disponible
+- Muy usado para ecommerce en Argentina
+- También ofrece retiro en sucursal
+
+**c) Correo Argentino**
+- Más económico para paquetes chicos
+- Cobertura total del país
+- API disponible vía integradores
+
+**Flujo de cotización:**
+```
+1. Cliente ingresa código postal de destino
+2. POST /api/shipping/quote con: [CP destino, peso, dimensiones]
+3. Backend consulta a Andreani + OCA en paralelo
+4. Devuelve array de opciones con precio y plazo estimado
+5. Cliente elige opción → queda guardada en la orden
+```
+
+**Después del envío (admin):**
+```
+PUT /api/admin/orders/{id}/shipping → Carga número de tracking
+→ Sistema notifica al cliente por email con link de seguimiento
+```
+
+---
+
+### Módulo 6: Panel de Administración (para Jacky)
+
+**Interfaz web simple y moderna con:**
+
+- 📊 **Dashboard:** ventas del día, semana, mes. Órdenes pendientes de despacho.
+- 📦 **Gestión de productos:** crear, editar, subir fotos, manejar variantes y stock.
+- 🛒 **Gestión de órdenes:** ver todas las órdenes, filtrar por estado, actualizar tracking.
+- 👥 **Clientes:** historial de compras por cliente.
+- 📧 **Emails automáticos:** confirmación de compra, orden enviada, etc.
+- ⚙️ **Configuración:** datos de la tienda, zonas de envío, costos.
+
+**Auth del panel:**
+- Login con usuario y contraseña (JWT + refresh token)
+- Solo un usuario admin (Jacky)
+- Sesión de 8hs con renovación automática
+
+---
+
+### Módulo 7: Emails Transaccionales
+
+Usaremos **Resend.com** (free tier: 3.000 emails/mes) o **SMTP de Gmail**.
+
+**Emails automáticos:**
+| Evento | Destinatario | Contenido |
+|---|---|---|
+| Compra confirmada | Cliente | Resumen de orden, detalles de pago |
+| Pago pendiente | Cliente | Instrucciones (ej: efectivo) |
+| Orden enviada | Cliente | Número de tracking + link de seguimiento |
+| Nueva orden | Jacky | Notificación con detalles del pedido |
+
+---
+
+## Estructura de Carpetas del Proyecto
+
+```
+fotos-jacky-backend/
+├── app/
+│   ├── main.py                 ← FastAPI app entry point
+│   ├── config.py               ← Variables de entorno
+│   ├── database.py             ← Conexión a Supabase/PostgreSQL
+│   ├── models/
+│   │   ├── product.py
+│   │   ├── order.py
+│   │   ├── customer.py
+│   │   └── shipping.py
+│   ├── routers/
+│   │   ├── products.py
+│   │   ├── cart.py
+│   │   ├── checkout.py
+│   │   ├── orders.py
+│   │   ├── shipping.py
+│   │   ├── webhooks.py
+│   │   └── admin.py
+│   ├── services/
+│   │   ├── mercadopago.py      ← Integración MP
+│   │   ├── andreani.py         ← Integración Andreani
+│   │   ├── oca.py              ← Integración OCA
+│   │   └── email.py            ← Envío de emails
+│   └── middleware/
+│       └── auth.py             ← JWT middleware
+├── requirements.txt
+├── Dockerfile
+├── .env.example
+└── README.md
+
+fotos-jacky-frontend/           ← JackyV2 adaptado
+├── index.html
+├── static/
+│   ├── css/
+│   └── js/
+│       ├── api.js              ← Capa de comunicación con el backend
+│       ├── cart.js             ← Lógica del carrito
+│       ├── checkout.js         ← Formulario y pago
+│       └── products.js         ← Listado y detalle
+└── pages/
+    ├── tienda.html
+    ├── producto.html
+    ├── carrito.html
+    ├── checkout.html
+    └── orden-confirmada.html
+```
+
+---
+
+## Base de Datos — Esquema SQL
+
+```sql
+-- Categorías
+CREATE TABLE categories (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    name VARCHAR(100) NOT NULL,
+    slug VARCHAR(100) UNIQUE NOT NULL,
+    description TEXT,
+    image_url TEXT,
+    position INT DEFAULT 0,
+    active BOOLEAN DEFAULT true,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Productos
+CREATE TABLE products (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    category_id UUID REFERENCES categories(id),
+    name VARCHAR(200) NOT NULL,
+    slug VARCHAR(200) UNIQUE NOT NULL,
+    description TEXT,
+    base_price DECIMAL(10,2) NOT NULL,
+    sku VARCHAR(100),
+    weight_grams INT DEFAULT 500,
+    dimensions_cm JSONB,           -- {"l":30,"w":20,"h":2}
+    active BOOLEAN DEFAULT true,
+    featured BOOLEAN DEFAULT false,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Variantes (tamaños, acabados)
+CREATE TABLE product_variants (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    product_id UUID REFERENCES products(id),
+    name VARCHAR(100) NOT NULL,    -- "A4 - Mate"
+    sku VARCHAR(100),
+    price_modifier DECIMAL(10,2) DEFAULT 0,
+    stock INT DEFAULT 0,
+    active BOOLEAN DEFAULT true
+);
+
+-- Imágenes de productos
+CREATE TABLE product_images (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    product_id UUID REFERENCES products(id),
+    url TEXT NOT NULL,
+    alt TEXT,
+    position INT DEFAULT 0
+);
+
+-- Clientes
+CREATE TABLE customers (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    email VARCHAR(200) UNIQUE NOT NULL,
+    first_name VARCHAR(100),
+    last_name VARCHAR(100),
+    phone VARCHAR(50),
+    dni VARCHAR(20),
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Direcciones de clientes
+CREATE TABLE addresses (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    customer_id UUID REFERENCES customers(id),
+    street VARCHAR(200),
+    street_number VARCHAR(20),
+    floor_apt VARCHAR(50),
+    city VARCHAR(100),
+    province VARCHAR(100),
+    postal_code VARCHAR(10),
+    is_default BOOLEAN DEFAULT false
+);
+
+-- Órdenes
+CREATE TABLE orders (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    order_number SERIAL,           -- Número legible: #0001, #0002...
+    customer_id UUID REFERENCES customers(id),
+    status VARCHAR(50) DEFAULT 'pending_payment',
+    subtotal DECIMAL(10,2),
+    shipping_cost DECIMAL(10,2),
+    total DECIMAL(10,2),
+    shipping_address JSONB,
+    shipping_method VARCHAR(100),  -- "andreani_domicilio"
+    shipping_tracking VARCHAR(200),
+    mp_preference_id VARCHAR(200),
+    mp_payment_id VARCHAR(200),
+    mp_status VARCHAR(50),
+    notes TEXT,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Items de órdenes
+CREATE TABLE order_items (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    order_id UUID REFERENCES orders(id),
+    product_id UUID REFERENCES products(id),
+    variant_id UUID REFERENCES product_variants(id),
+    product_name VARCHAR(200),
+    variant_name VARCHAR(100),
+    quantity INT NOT NULL,
+    unit_price DECIMAL(10,2) NOT NULL
+);
+
+-- Historial de estados
+CREATE TABLE order_status_history (
+    id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    order_id UUID REFERENCES orders(id),
+    status VARCHAR(50),
+    note TEXT,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+```
+
+---
+
+## Fases de Desarrollo
+
+### 🔴 Fase 1 — Fundación (Semana 1)
+- [ ] Setup de repositorio GitHub
+- [ ] Configurar Supabase (base de datos + storage)
+- [ ] Estructura base de FastAPI
+- [ ] CRUD completo de productos y categorías
+- [ ] Subida de imágenes a Supabase Storage
+- [ ] Deploy inicial en Railway
+
+### 🟡 Fase 2 — Checkout y Pagos (Semana 2)
+- [ ] Endpoint de validación de carrito
+- [ ] Creación de clientes y órdenes
+- [ ] Integración con Mercado Pago (Checkout Pro)
+- [ ] Webhook de notificaciones de pago
+- [ ] Emails transaccionales (Resend)
+
+### 🟢 Fase 3 — Envíos (Semana 3)
+- [ ] Integración Andreani (cotización + tracking)
+- [ ] Integración OCA (cotización)
+- [ ] Panel de actualización de tracking para admin
+- [ ] Email "tu pedido fue enviado" con tracking
+
+### 🔵 Fase 4 — Panel Admin (Semana 3-4)
+- [ ] Login con JWT
+- [ ] Dashboard de métricas
+- [ ] Gestión de productos (CRUD visual)
+- [ ] Gestión de órdenes
+
+### ⚪ Fase 5 — Frontend (Semana 4)
+- [ ] Adaptar JackyV2 para consumir la API propia
+- [ ] Páginas: tienda, producto, carrito, checkout
+- [ ] Página de confirmación de orden
+- [ ] Deploy final en Vercel
+
+---
+
+## Costos Estimados (mensuales)
+
+| Servicio | Plan | Costo |
+|---|---|---|
+| Supabase (DB + Storage) | Free (500MB DB, 1GB Storage) | **$0** |
+| Railway (Backend) | Hobby ($5 USD/mes) | ~**$5.000 ARS** |
+| Vercel (Frontend) | Free | **$0** |
+| Resend (Emails) | Free (3.000 emails/mes) | **$0** |
+| Dominio propio (opcional) | ~$2.000 ARS/año | ~**$170 ARS/mes** |
+| **TOTAL** | | **~$5.170 ARS/mes** |
+
+> **vs Tienda Nube: $80.000 ARS/mes → ahorro de ~$75.000 ARS/mes** 💰
+
+---
+
+## Preguntas Abiertas
+
+> [!IMPORTANT]
+> Antes de arrancar, necesito que me confirmes estas decisiones:
+
+1. **¿Jacky tiene cuenta de Mercado Pago Business?** (necesaria para recibir pagos a cuenta de empresa, no cuenta personal)
+2. **¿Qué courier prefiere usar?** ¿Andreani, OCA, o ambos con selección del cliente?
+3. **¿Los productos tienen variantes?** Por ejemplo: ¿un mismo producto se vende en varios tamaños con precios distintos? (10x15, A4, A3...)
+4. **¿Manejo de stock?** ¿Necesitamos controlar stock por variante, o los productos son "bajo pedido" sin stock fijo?
+5. **¿El frontend JackyV2 va a ser el mismo o lo reconstruimos?** (actualmente está en formato Tienda Nube `.tpl`; hay que convertirlo a HTML/JS puro)
+6. **¿Tiene dominio propio?** (ej: `fotosjacky.com.ar`)
+

@@ -3,45 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cargando Producto | Fotos Jacky</title>
+  <title>Producto | Fotos Jacky</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/src/css/design-system.css">
   <link rel="stylesheet" href="/src/css/store.css">
 </head>
 <body class="store-theme">
 
-  <!-- ===== HEADER TIENDA ===== -->
+  <!-- ===== HEADER ===== -->
   <header class="store-header">
-    <a href="index.html" class="logo">FOTOS JACKY.</a>
-    <div style="display:flex; align-items:center;">
+    <a href="index.html" class="logo">FOTOS <span>JACKY.</span></a>
+    <div style="display:flex; align-items:center; gap:28px;">
       <nav class="store-nav">
         <a href="index.html">Tienda</a>
+        <a href="sesiones.html">Sesiones</a>
       </nav>
-      <div style="margin-left: 24px;">
-        <a href="carrito.html" class="cart-badge" aria-label="Carrito" style="position:relative; display:flex;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:24px;height:24px;"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-          <span class="cart-count" id="cartCountBadge" style="position:absolute; top:-8px; right:-8px; background:var(--indigo-deep); color:white; border-radius:50%; width:18px; height:18px; font-size:0.7rem; display:flex; justify-content:center; align-items:center;">0</span>
-        </a>
-      </div>
+      <a href="carrito.html" class="cart-badge" data-open-cart aria-label="Carrito">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+        <span class="cart-count" id="cartCountBadge" style="display:none">0</span>
+      </a>
     </div>
   </header>
 
   <main class="page-top-spacing">
     <div class="container">
-      <div class="glass-panel">
-
       <div class="product-layout" id="productDetailContainer">
-        <!-- Injected via JS -->
-        <p>Cargando detalles del producto...</p>
-      </div>
+        <p style="color:var(--ink-soft)">Cargando producto...</p>
       </div>
     </div>
   </main>
 
-  <script type="module" src="/src/js/main.js"></script>
   <script type="module" src="/src/js/pages/product-detail.js"></script>
-  <script type="module" src="/src/js/components/cart-widget.js"></script>
+  <script type="module" src="/src/js/components/cart-drawer.js"></script>
 </body>
 </html>

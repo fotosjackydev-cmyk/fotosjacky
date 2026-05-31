@@ -51,9 +51,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         <input type="number" id="qtyInput" value="1" min="1" max="99">
       </div>
 
-      <button id="addToCartBtn" class="btn btn-primary" style="width:100%; padding: 16px;">Agregar al Carrito</button>
+      <button id="addToCartBtn" class="btn-cta">Agregar al carrito</button>
     </div>
   `;
+
+  updateBadge();
 
   // Lógica de interactividad
   const addToCartBtn = document.getElementById('addToCartBtn');
@@ -83,15 +85,22 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     cartManager.addItem(product, qty, selectedVariant);
-    
-    addToCartBtn.textContent = '¡Agregado!';
-    addToCartBtn.style.backgroundColor = '#4CAF50';
-    addToCartBtn.style.borderColor = '#4CAF50';
-    
-    setTimeout(() => {
-      addToCartBtn.textContent = 'Agregar al Carrito';
-      addToCartBtn.style.backgroundColor = '';
-      addToCartBtn.style.borderColor = '';
-    }, 2000);
+    updateBadge();
+
+    // Abre el cart drawer con aviso
+    window.dispatchEvent(new CustomEvent('cart:added', { detail: { name: product.name } }));
   });
 });
+
+// Actualiza el contador del ícono del header
+function updateBadge() {
+  try {
+    const cart = JSON.parse(localStorage.getItem('fotosjacky_cart') || '[]');
+    const count = cart.reduce((acc, i) => acc + (i.quantity || 1), 0);
+    const badge = document.getElementById('cartCountBadge');
+    if (badge) {
+      badge.textContent = count;
+      badge.style.display = count > 0 ? 'flex' : 'none';
+    }
+  } catch (e) {}
+}

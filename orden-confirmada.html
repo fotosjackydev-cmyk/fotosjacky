@@ -109,9 +109,10 @@
     try { localStorage.removeItem('fotosjacky_cart'); } catch (e) {}
 
     // Mostrar el número de pedido real consultándolo al backend
-    const params = new URLSearchParams(window.location.search);
-    const orderId = params.get('order_id') || params.get('external_reference');
-    if (orderId) {
+    async function mostrarNumeroPedido() {
+      const params = new URLSearchParams(window.location.search);
+      const orderId = params.get('order_id') || params.get('external_reference');
+      if (!orderId) return;
       try {
         const res = await fetch(`${api.base}/orders/${orderId}/status`);
         if (res.ok) {
@@ -124,6 +125,7 @@
         }
       } catch (e) { /* si no se puede, simplemente no mostramos el número */ }
     }
+    mostrarNumeroPedido();
   </script>
 </body>
 </html>

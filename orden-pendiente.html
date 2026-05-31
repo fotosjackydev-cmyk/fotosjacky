@@ -63,9 +63,10 @@
 
   <script type="module">
     import { api } from '/src/js/api.js';
-    const params = new URLSearchParams(window.location.search);
-    const orderId = params.get('order_id') || params.get('external_reference');
-    if (orderId) {
+    async function mostrarNumeroPedido() {
+      const params = new URLSearchParams(window.location.search);
+      const orderId = params.get('order_id') || params.get('external_reference');
+      if (!orderId) return;
       try {
         const res = await fetch(`${api.base}/orders/${orderId}/status`);
         if (res.ok) {
@@ -78,6 +79,7 @@
         }
       } catch (e) {}
     }
+    mostrarNumeroPedido();
   </script>
 </body>
 </html>
